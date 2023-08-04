@@ -10,3 +10,14 @@
 /* .font {
   font-family: 'Kanit', sans-serif;
 } */
+
+.box-shadows {
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  border-radius: 1%;
+  /* background-color: #FFFBF5; */
+}
+
+.btn-color {
+  background-color: #11468F;
+  color: #ffff;
+}

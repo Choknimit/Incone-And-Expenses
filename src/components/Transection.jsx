@@ -5,7 +5,8 @@ import React, { useEffect, useState } from 'react'
 
 import ItemsData from './ItemsData';
 
-import { Stack, Pagination } from '@mui/material'
+import { Stack, Pagination, Box, createTheme  } from '@mui/material'
+import shadows from '@mui/material/styles/shadows';
 
 function Transection({ iteminnit }) {
     const [itemInPage, setItemInPage] = useState([])
@@ -13,7 +14,7 @@ function Transection({ iteminnit }) {
     
 
     const pagination = (iteminnit) => {
-        const itemPerPage = 6
+        const itemPerPage = 8
         const pages = Math.ceil(iteminnit.length / itemPerPage) //? จำนวนข้อมูลทั้งหมดหารด้วยข้อมูลแต่ละหน้า Math.ceil เป็นการปัดเศษขึ้น
 
         const newItems = Array.from({length: pages}, (item, inx) => {
@@ -34,15 +35,26 @@ function Transection({ iteminnit }) {
         setCurrentPage(newPage - 1)
     }
 
+    const theme = createTheme({
+        palette: {
+          primary: {
+            main: '#0d47a1',
+          },
+          secondary: {
+            main: '#f44336',
+          },
+        },
+      });
+
     return (
-      <div>
+      <Box>
           {itemInPage.length > 0 && itemInPage[currentPage].map((dataItem) => {
               return <ItemsData {...dataItem} key={dataItem.id} />
           })}
         <Stack spacing={2}>
-            <Pagination count={itemInPage.length} page={currentPage + 1} onChange={handleChange} variant="outlined" shape="rounded" />
+            <Pagination  count={itemInPage.length} page={currentPage + 1} onChange={handleChange} variant="outlined" color="primary" shape="rounded" />
         </Stack>
-      </div>
+      </Box>
     )
 }  
 

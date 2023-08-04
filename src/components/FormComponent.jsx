@@ -20,7 +20,6 @@ function FormComponent({ addNewItems }) {
     const [title, setTitle] = useState('')
     const [amount, setAmount] = useState(0)
     const [option, setOption] = useState('')
-    const [messageError, setMessageError] = useState('')
     const [valid, setValid] = useState(false)
 
     const FieldTitle = (e) => {
@@ -53,12 +52,11 @@ function FormComponent({ addNewItems }) {
         // } else if (itemData.option === '') {
         //     return setMessageError('**กรุณาเลือกรายรับหรือรายจ่าย')
         // }
-        // console.log(itemData)
+        console.log(itemData)
         addNewItems(itemData)
         setTitle('')
         setAmount(0)
         setOption('')
-        setMessageError('')
     }
 
     useEffect(() => {
@@ -67,7 +65,7 @@ function FormComponent({ addNewItems }) {
     }, [title, amount, option])
   return (
     <form onSubmit={submitForm}>
-        <Box sx={{display: 'flex', flexDirection: 'column', gap: '1.5rem'}} >
+        <Box sx={{display: 'flex', flexDirection: 'column', gap: '1.5rem', padding: '1rem', backgroundColor: '#ffffff'}} className="box-shadows" >
             <TextField
                 id='outlined-textarea'
                 label='ชื่อรายการ'
@@ -77,6 +75,8 @@ function FormComponent({ addNewItems }) {
                 type='text'
                 value={title}
                 onChange={FieldTitle}
+                error={!title}
+                helperText={!title ? '*Required': ''}
             />
 
             <TextField
@@ -88,14 +88,13 @@ function FormComponent({ addNewItems }) {
                 type="number"
                 value={amount}
                 onChange={FieldAmount}
+                error={!amount}
+                helperText={!amount ? '*Required': ''}
             />
 
-            <Box sx={{ display: 'flex', height: '5px' }}>
-                <FormControlLabel value='income' checked={option === 'income'} onChange={selectOption} control={<Radio />} label='รายรับ' />
-                <FormControlLabel value='expenses' checked={option === 'expenses'} onChange={selectOption} control={<Radio />} label='รายจ่าย' />
-            </Box>
-            <Box sx={{height: '12px', color: '#D71313'}}>
-                <p>{messageError}</p>
+            <Box sx={{ display: 'flex', height: '6px' }}>
+                <FormControlLabel size='small' value='income' error={!option} checked={option === 'income'} onChange={selectOption} control={<Radio />} label='รายรับ' />
+                <FormControlLabel size='small' value='expenses' error={!option} checked={option === 'expenses'} onChange={selectOption} control={<Radio />} label='รายจ่าย' />
             </Box>
             <Button variant='contained' type='submit' disabled={!valid}>เพิ่มรายการ</Button>
         </Box>
