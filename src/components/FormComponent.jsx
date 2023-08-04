@@ -13,7 +13,7 @@ import {
   Radio,
 } from '@mui/material';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid'
 
 function FormComponent({ addNewItems }) {
@@ -21,6 +21,7 @@ function FormComponent({ addNewItems }) {
     const [amount, setAmount] = useState(0)
     const [option, setOption] = useState('')
     const [messageError, setMessageError] = useState('')
+    const [valid, setValid] = useState(false)
 
     const FieldTitle = (e) => {
         // console.log(e.target.value)
@@ -30,7 +31,7 @@ function FormComponent({ addNewItems }) {
         // console.log(e.target.value)
         setAmount(e.target.value)
     }
-    
+
     const selectOption = (e) => {
         setOption(e.target.value)
         // console.log(e.target.value)
@@ -45,20 +46,25 @@ function FormComponent({ addNewItems }) {
             amount: Number(amount),
             option: option,
         }
-        if(itemData.title === '') {
-            return setMessageError('**กรุณากรอกข้อมูลรายการ')
-        } else if (itemData.amount === 0) {
-            return setMessageError('**กรุณากรอกตัวเลขจำนวนเลขห้ามเป็นศูนย์')
-        } else if (itemData.option === '') {
-            return setMessageError('**กรุณาเลือกรายรับหรือรายจ่าย')
-        }
-        console.log(itemData)
+        // if(itemData.title === '') {
+        //     return setMessageError('**กรุณากรอกข้อมูลรายการ')
+        // } else if (itemData.amount === 0) {
+        //     return setMessageError('**กรุณากรอกตัวเลขจำนวนเลขห้ามเป็นศูนย์')
+        // } else if (itemData.option === '') {
+        //     return setMessageError('**กรุณาเลือกรายรับหรือรายจ่าย')
+        // }
+        // console.log(itemData)
         addNewItems(itemData)
         setTitle('')
         setAmount(0)
         setOption('')
         setMessageError('')
     }
+
+    useEffect(() => {
+        const checkData = title.trim().length > 0 && amount !== 0 && option !== ''
+        setValid(checkData)
+    }, [title, amount, option])
   return (
     <form onSubmit={submitForm}>
         <Box sx={{display: 'flex', flexDirection: 'column', gap: '1.5rem'}} >
@@ -91,7 +97,7 @@ function FormComponent({ addNewItems }) {
             <Box sx={{height: '12px', color: '#D71313'}}>
                 <p>{messageError}</p>
             </Box>
-            <Button variant='contained' type='submit'>เพิ่มรายการ</Button>
+            <Button variant='contained' type='submit' disabled={!valid}>เพิ่มรายการ</Button>
         </Box>
     </form>
   );

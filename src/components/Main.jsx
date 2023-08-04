@@ -11,6 +11,15 @@ function Main() {
         {id: 1, title: 'ค่ารถ', amount: 120},
         {id: 2, title: 'ค่าประกัน', amount: 1000},
         {id: 3, title: 'ค่ากิน', amount: 5000},
+        {id: 4, title: 'ค่ากิน', amount: 5000},
+        {id: 5, title: 'ค่ากิน', amount: 5000},
+        {id: 6, title: 'ค่ากิน', amount: 5000},
+        {id: 7, title: 'ค่ากิน', amount: 5000},
+        {id: 8, title: 'ค่ากิน', amount: 5000},
+        {id: 9, title: 'ค่ากิน', amount: 5000},
+        {id: 10, title: 'ค่ากิน', amount: 5000},
+        {id: 11, title: 'ค่ากิน', amount: 5000},
+        {id: 12, title: 'ค่ากิน', amount: 5000},
     ]
     const [items, setItems] = useState(datainnit)
 

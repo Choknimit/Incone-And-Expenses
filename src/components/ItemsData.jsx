@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
-import React from 'react'
-import { styled, Paper, Box, Grid } from '@mui/material'
+import React, { useState } from 'react'
+import { styled, Paper, Box, Grid, Pagination, Stack  } from '@mui/material'
 import './ItemData.css'
 
 // eslint-disable-next-line react/prop-types
@@ -16,12 +16,18 @@ function ItemsData({ title, amount, option }) {
       const amountFormat = typeof amount === 'number' && !isNaN(amount) ? amount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2}) : '';
       const symbol = option === 'income' ? '+' : '-'
       const status = option === 'income' ? 'income' : 'expenses'
+
+    //? Paginations
+    const [dataPage, setDataPage] = useState([])
+    const [currentPage, setCurrentPage] = useState(0)
+
   return (
     <Grid sx={{display: 'flex', gap: '2rem', paddingBottom: '1rem'}} >
         <Item sx={{display: 'flex', justifyContent: 'space-between', width: '100%', }} className={status} >
             {title}
             <span>{symbol}{amountFormat}฿</span>
         </Item>
+        
     </Grid>
   )
 }   
