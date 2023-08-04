@@ -1,0 +1,8 @@
+.income {
+    border-right: 5px solid #2ccc71 !important;
+    border-radius: 1%;
+}
+
+.expenses {
+    border-right: 5px solid red !important;
+}
